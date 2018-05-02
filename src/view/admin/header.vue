@@ -12,11 +12,15 @@
       @select="handleSelect"
       active-text-color="#2d8cf0"
       background-color="#304156"
-      
+
       >
-      
+
       <el-menu-item :index=" index.toString() " v-for="(i,index) in listArray" :key="index" @click="changeChildMenus(index)">{{ i.rightText }}</el-menu-item>
     </el-menu>
+
+    <div class="head-right-ctrl">
+      欢迎，{{ baseInfo.userType }}
+    </div>
 
   </el-header>
 </template>
@@ -31,7 +35,8 @@
       },
       data(){
         return {
-          activeIndex2:'0'
+          activeIndex2:'0',
+          baseInfo:JSON.parse(sessionStorage.getItem('baseInfo'))
         }
       },
       methods:{
@@ -66,6 +71,14 @@
     margin-left:140px;
     border-bottom: none;
     /* line-height: 80px; */
+  }
+  .head-right-ctrl{
+    float:right;
+    height:100%;
+    width:200px;
+    color:#fff;
+    line-height:80px;
+    font-size:0.8rem;
   }
   .head-nav{
     float:right;

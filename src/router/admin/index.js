@@ -2,8 +2,9 @@
  * Created by Administrator on 2018/3/9.
  */
 import Custom_function from 'view/admin/customFunction'
-import moduleTest from 'view/admin/moduleTest'
 import admin from 'view/admin/'
+
+import r_settings from './settings'
 
 import test from '@/components/HelloWorld'
 
@@ -17,18 +18,9 @@ export default[
     path:'/admin',
     name:'admin-main',
     component:admin,
-    redirect:'/admin/Custom-function',
+    redirect:'/admin/settings',
     children:[
-      {
-        path: 'Custom-function',
-        name: '定制功能',
-        component: Custom_function,
-        children:[
-          {path:'module1',component:moduleTest},
-          {path:'module2',component:moduleTest},
-          {path:'module3',component:moduleTest},
-        ]
-      }
+      r_settings
     ]
-  }
+  },
 ]

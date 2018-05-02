@@ -7,10 +7,16 @@ import store from '@/store'
 import ElementUI from 'element-ui';
 import untils from '@/assets/js/untils'
 
+import instance from '@/API/'
+
 import 'element-ui/lib/theme-chalk/index.css';
 import '@/assets/css/base.css'
 
 Vue.config.productionTip = false
+
+if(sessionStorage.getItem('token')){
+  instance.defaults.headers['Authentication'] = sessionStorage.getItem('token')
+}
 
 Vue.use(ElementUI)
 Vue.use(untils)
@@ -46,5 +52,4 @@ router.beforeEach(function(to,from,next){
     }
 
   }
-
 })

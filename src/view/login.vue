@@ -70,7 +70,6 @@
         //老师&家长角色：13660000002/000002
         //管理员：admin？666666
         let obj = qs.stringify({userName:'admin',password:'666666',webCode:'1234'})
-        console.log(obj)
 
         auth.login.r(obj).then(function(res){
           let d = res.data.data
@@ -78,7 +77,7 @@
           if(res.data.message == 'OK'){
 
             //登陆成功后设置请求头
-            instance.defaults.headers.post['Authentication'] = d.token;
+            instance.defaults.headers['Authentication'] = d.token;
 
             let obj = {
               userType:d.userType,
@@ -104,6 +103,13 @@
 
         }).catch(function(e){
           console.log('error:'+e)
+        }).then(function(){
+          return auth.identity.r()
+        }).catch(function(e){
+
+        }).then(function(res){
+          console.log(res)
+
         })
 
 

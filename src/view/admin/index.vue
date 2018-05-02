@@ -17,16 +17,18 @@
               background-color="#304156"
               text-color="#fff"
               active-text-color="#ffd04b">
-              <el-submenu :index="index.toString()" :key="index" v-for="(i,index) in childMenus.trees" @click.native="test(i.trees)">
+              <el-submenu :index="index.toString()" :key="index" v-for="(i,index) in childMenus.trees" @click.native="goModule(i.rightUrl,$event)">
                 <template slot="title">
-                  <div class="asdqwe" >
-                    <i class="el-icon-location"></i>
-                    <span>{{ i.rightText }}</span>
-                  </div>
+                  <i class="el-icon-location"></i>
+                  <span>{{ i.rightText }}</span>
                 </template>
                 <el-menu-item-group>
                   <!--<template slot="title">分组一</template>-->
-                  <el-menu-item :index="index+'-'+jIndex" :key="jIndex" v-for="(j,jIndex) in i.trees" v-if="j.rightTip != 2">{{ j.rightText }}</el-menu-item>
+                  <el-menu-item :index="index+'-'+jIndex"
+                                :key="jIndex"
+                                v-for="(j,jIndex) in i.trees"
+                                v-if="j.rightTip != 2"
+                                @click.native="goModule(j.rightUrl)">{{ j.rightText }}</el-menu-item>
                 </el-menu-item-group>
               </el-submenu>
 
@@ -73,14 +75,13 @@
 
       <el-main style="margin-left:200px;padding-top:80px;height:100%;overflow:auto;">
 
-        <p>main menu:<span v-for="i in menus.mainMenus"> {{ i }} </span></p>
-
+        <router-view></router-view>
 
       </el-main>
 
     </div>
 
-    <!--<router-view></router-view>-->
+
   </div>
 </template>
 
@@ -118,10 +119,12 @@
         handleClose(){
 
         },
-        test(trees){
-          if(trees[0].rightTip == 2){
-            console.log(trees)
+        goModule(url,e){
+          if(url == ''){
+            return
           }
+          let r_url = '/admin/settings'+url
+          this.$router.push({path:r_url})
         }
       },
       directives: {
